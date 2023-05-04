@@ -5437,7 +5437,7 @@
   "resolved" "https://registry.npmjs.org/qr.js/-/qr.js-0.0.0.tgz"
   "version" "0.0.0"
 
-"qrcode@^1.5.1", "qrcode@1.5.3":
+"qrcode@^1.5.1", "qrcode@^1.5.3", "qrcode@1.5.3":
   "integrity" "sha512-puyri6ApkEHYiVl4CFzo1tDkAZ+ATcnbJrJ6RiBM1Fhctdn/ix9MTE3hRph33omisEbC/2fcfemsseiKgBPKZg=="
   "resolved" "https://registry.npmjs.org/qrcode/-/qrcode-1.5.3.tgz"
   "version" "1.5.3"

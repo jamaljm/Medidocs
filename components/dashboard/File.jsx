@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Qr from '../qrcode/Qr'
 
 export default function File() {
     const [send, setSend] = useState(false);
@@ -120,11 +120,9 @@ export default function File() {
 
 function Qrcode() {
     return (
-        <div className="flex w-1/2 justify-center mt-7 bg-slate-200 rounded-2xl border-2 items-center">
-            <h2>Scan the qr code</h2>
-            <img src="">
-
-            </img>
+        <div className="flex flex-col py-4 w-1/2  justify-center mt-7 bg-slate-200 rounded-2xl border-2 items-center">
+            <h2 className="font-bold ">Scan the qr code</h2>
+            <Qr obj="fgfdgdgdfgdf" style="h-44 w-44 m-5 bg-white p-3 rounded-3xl"/>
             </div>
         )
 }
