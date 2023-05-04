@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import File from "./File";
-import Rightbar from "./Rightbar";
+import Rightbar from "../dashboard/Rightbar";
 
 export default function Dashboard() {
   return (

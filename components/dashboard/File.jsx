@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 export default function File() {
+    const [send, setSend] = useState(false);
+    
+  const handleClick = () => {
+    setSend(!send);
+  };
+
   return (
     <div className="flex justify-start flex-col w-full gap-4 items-center mt-12">
       <div className="gap-2 flex flex-col justify-start item-center">
@@ -10,68 +17,67 @@ export default function File() {
         <p className="item-center content-center flex justify-center">
           Securely store your medical records on the blockchain
         </p>
-      </div>
-      <div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl mt-5 bg-slate-50 justify-between gap-5">
-        <div className=" flex items-center gap-2 ">
-          <img
-            className="w-10"
-            src="https://img.icons8.com/cute-clipart/64/null/file.png"
-          />
-          <h2 className="font-body font-semibold">MRI scan</h2>
-        </div>
-        <div className="flex items-center justify-center ">
-          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-            View Doc
-          </button>
-        </div>
+          </div>
+          {send ? (
+      <><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl mt-5 bg-slate-50 justify-between gap-5">
+                  <div className=" flex items-center gap-2 ">
+                      <img
+                          className="w-10"
+                          src="https://img.icons8.com/cute-clipart/64/null/file.png" />
+                      <h2 className="font-body font-semibold">MRI scan</h2>
+                  </div>
+                  <div className="flex items-center justify-center ">
+                      <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
+                          View Doc
+                      </button>
+                  </div>
+              </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
+                      <div className=" flex items-center gap-2 ">
+                          <img
+                              className="w-10"
+                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
+                          <h2 className="font-body font-semibold">MRI scan</h2>
+                      </div>
+                      <div className="flex items-center justify-center ">
+                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
+                              View Doc
+                          </button>
+                      </div>
+                  </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
+                      <div className=" flex items-center gap-2 ">
+                          <img
+                              className="w-10"
+                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
+                          <h2 className="font-body font-semibold">MRI scan</h2>
+                      </div>
+                      <div className="flex items-center justify-center ">
+                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
+                              View Doc
+                          </button>
+                      </div>
+                  </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
+                      <div className=" flex items-center gap-2 ">
+                          <img
+                              className="w-10"
+                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
+                          <h2 className="font-body font-semibold">MRI scan</h2>
+                      </div>
+                      <div className="flex items-center justify-center ">
+                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
+                              View Doc
+                          </button>
+                      </div>
+                  </div></>) : (<Qrcode />)}
+      <div className="flex gap-1 w-1/2 flex-col mt-3">
+        <button
+          onClick={handleClick}
+          className="w-full bg-blue-500 text-white  rounded-2xl py-2 "
+        >
+          Share to a doctor
+        </button>
       </div>
 
-      <div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-        <div className=" flex items-center gap-2 ">
-          <img
-            className="w-10"
-            src="https://img.icons8.com/cute-clipart/64/null/file.png"
-          />
-          <h2 className="font-body font-semibold">MRI scan</h2>
-        </div>
-        <div className="flex items-center justify-center ">
-          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-            View Doc
-          </button>
-        </div>
-      </div>
-
-      <div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-        <div className=" flex items-center gap-2 ">
-          <img
-            className="w-10"
-            src="https://img.icons8.com/cute-clipart/64/null/file.png"
-          />
-          <h2 className="font-body font-semibold">MRI scan</h2>
-        </div>
-        <div className="flex items-center justify-center ">
-          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-            View Doc
-          </button>
-        </div>
-      </div>
-
-      <div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-        <div className=" flex items-center gap-2 ">
-          <img
-            className="w-10"
-            src="https://img.icons8.com/cute-clipart/64/null/file.png"
-          />
-          <h2 className="font-body font-semibold">MRI scan</h2>
-        </div>
-        <div className="flex items-center justify-center ">
-          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-            View Doc
-          </button>
-        </div>
-      </div>
-
-      <div className="w-2/3 mt-8">
+      {/* <div className="w-2/3 mt-8">
         <label className="cursor-pointer">
           <input
             className="text-sm cursor-pointer w-36 hidden"
@@ -106,7 +112,20 @@ export default function File() {
             </div>
           </div>{" "}
         </label>
-      </div>
+      </div> */}
     </div>
   );
 }
+
+
+function Qrcode() {
+    return (
+        <div className="flex w-1/2 justify-center mt-7 bg-slate-200 rounded-2xl border-2 items-center">
+            <h2>Scan the qr code</h2>
+            <img src="">
+
+            </img>
+            </div>
+        )
+}
+
