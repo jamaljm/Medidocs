@@ -1,0 +1,19 @@
+import React from "react";
+
+export default function Navbar() {
+  return (
+    <div className="">
+      <div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
+        <img src="/assets/logo.svg" alt="logo" />
+        <div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
+          <p>About</p>
+          <p>About Us</p>
+          <p>About</p> <p>About</p> <p>About</p>
+        </div>
+        <button className="btn bg-white text-[#7270dd] border-none hover:bg-[#7270dd] hover:text-white capitalize rounded-full">
+          Get Started
+        </button>
+      </div>
+    </div>
+  );
+}
