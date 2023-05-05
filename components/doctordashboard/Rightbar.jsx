@@ -12,7 +12,7 @@ export default function Rightbar() {
 
   const address = useAddress();
   const { contract } = useContract(
-    "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
+    "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
   );
   const { mutateAsync: addPatient } = useContractWrite(contract, "addPatient");
   const { data, error } = useContractRead(contract, "getPatientInfo", [
@@ -62,65 +62,34 @@ export default function Rightbar() {
 
   return (
     <div className="flex flex-col items-left py-6 px-7 mr-4 w-full justify-start">
-      <h2 className="font-body text-lg font-semibold">Enter your Details</h2>
-
-      <div className="w-full flex justify-center flex-col gap-3 items-start ">
-        <div className="flex gap-1 w-full mt-5 flex-col">
-          <p className="font-body text-sm font-medium px-2"> Blood Group</p>
-          <input
-            className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
-            type="text"
-            name="blood_group"
-            value={formData.blood_group}
-            onChange={handleInputChange}
+      <h2 className="font-body text-lg font-semibold">Enter patient address</h2>
+      <div className="flex gap-1 w-full mt-2
+       flex-col">
+        <input
+          className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
+          type="text"
+          name="weight"
+          value={formData.weight}
+          onChange={handleInputChange}
+        />
+      </div>
+      <button
+        onClick={addPatientHandler}
+        className="w-full bg-blue-400 text-white mt-2  rounded-2xl py-2 "
+      >
+        Get doc
+      </button>
+      <div className="flex w-full px-4 py-3 border-2 rounded-2xl mt-5 bg-slate-50 justify-between gap-5">
+        <div className=" flex items-center gap-2 ">
+          <img
+            className="w-10"
+            src="https://img.icons8.com/cute-clipart/64/null/file.png"
           />
+          <h2 className="font-body font-semibold">MRI scan</h2>
         </div>
-        <div className="flex gap-1 w-full  flex-col">
-          <p className="font-body text-sm font-medium px-2"> Age</p>
-          <input
-            className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
-            type="text"
-            name="age"
-            value={formData.age}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex gap-1 w-full  flex-col">
-          <p className="font-body text-sm font-medium px-2"> Gender</p>
-          <input
-            className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
-            type="text"
-            name="gender"
-            value={formData.gender}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex gap-1 w-full  flex-col">
-          <p className="font-body text-sm font-medium px-2"> Height</p>
-          <input
-            className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
-            type="text"
-            name="height"
-            value={formData.height}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex gap-1 w-full  flex-col">
-          <p className="font-body text-sm font-medium px-2"> Weight</p>
-          <input
-            className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
-            type="text"
-            name="weight"
-            value={formData.weight}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="flex gap-1 w-full flex-col mt-3">
-          <button
-            onClick={addPatientHandler}
-            className="w-full bg-blue-400 text-white  rounded-2xl py-2 "
-          >
-            Update
+        <div className="flex items-center justify-center ">
+          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
+            View Doc
           </button>
         </div>
       </div>

@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 import Qr from '../qrcode/Qr'
 import QRCodeScanner from "./QrScanner";
-
+import {
+  useAddress,
+  useContract,
+  useMetamask,
+  useContractWrite,
+  useContractRead,
+} from "@thirdweb-dev/react";
 
 export default function File() {
     const [send, setSend] = useState(false);
     const [scannedText, setScannedText] = useState('');
-
+ 
     const handleScan = (text) => {
       setScannedText(text);
     };
   
-    
+     const address = useAddress();
+     const { contract } = useContract(
+       "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
+     );
+     const { mutateAsync: addPatient } = useContractWrite(
+       contract,
+       "addPatient"
+     );
+     const { data, error } = useContractRead(contract, "getPatientDocuments", [
+       address,
+     ]);
+  
+  console.log(data)
   const handleClick = () => {
     setSend(!send);
   };
@@ -26,7 +44,7 @@ export default function File() {
           Securely store your medical records on the blockchain
         </p>
           </div>
-          {send ? (
+          {!send ? (
       <><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl mt-5 bg-slate-50 justify-between gap-5">
                   <div className=" flex items-center gap-2 ">
                       <img
@@ -86,7 +104,6 @@ export default function File() {
         </div>
            <div>
           
-           <p>Scanned text: {scannedText}</p>
             </div> 
       {/* <div className="w-2/3 mt-8">
         <label className="cursor-pointer">
