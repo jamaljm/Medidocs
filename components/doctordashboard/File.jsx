@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from "react";
 import Qr from '../qrcode/Qr'
 import { useStorageUpload } from "@thirdweb-dev/react";
+import { create } from 'web3.storage';
+
+
 
 export default function File() {
 
@@ -9,38 +12,37 @@ export default function File() {
   const { mutateAsync: upload } = useStorageUpload();
   
 
-
-  const onDrop = useCallback(
-    async (acceptedFiles) => {
-      
-      const uris = await upload({ data: acceptedFiles });
-      console.log(uris);
-    },
-    [upload]
-  );
-
   
-  
-    const handleFileUpload = async (file) => {
-      try {
-        const result = await upload(file);
+  const [file, setFile] = useState(null);
+  const [cid, setCid] = useState(null);
 
-        const ipfsLink = result.cid.toString();
+  const handleFileInputChange = (event) => {
+    setFile(event.target.files[0]);
+  };
 
-        // Handle the successful upload and retrieve the IPFS link
-        console.log("Upload complete. IPFS link:", ipfsLink);
-      } catch (error) {
-        // Handle the upload error
-        console.error("Upload error:", error);
-      }
+  const handleUploadButtonClick = async () => {
+    if (!file) {
+      alert('Please select a file to upload.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const client = create(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDZDQTI3YmI5NkFlMzNlODJjQTZEMWIzMTgwMjcxNTBmMmEwODA0OTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODMyNjY4NjIyODYsIm5hbWUiOiJqYW1hbCJ9.TTK1HcObAQ7tEVxnzeuF5ryfIeS253dRBXvc8iRuV_Y"
+    );
+
+    try {
+      const cid = await client.put(formData);
+      setCid(cid);
+    } catch (error) {
+      console.error(error);
+    }
   };
   
   const handleClick = () => {
     setSend(!send);
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { mutateAsync: upload } = useStorageUpload();
-
   
   };
 
@@ -57,7 +59,6 @@ export default function File() {
       <Qrcode />
       <div className="flex gap-1 w-1/2 flex-col mt-3">
         <button
-          onClick={handleFileUpload}
           className="w-full bg-blue-500 text-white  rounded-2xl py-2 "
         >
           Share to a doctor
@@ -69,7 +70,7 @@ export default function File() {
           <input
             className="text-sm cursor-pointer w-36 hidden"
             type="file"
-            onChange={onDrop}
+            onChange={handleFileInputChange}
             multiple
           />{" "}
           <div className="file_upload p-5 flex border-4 justify-between items-center w-full border-dotted border-gray-300 rounded-lg">
@@ -98,6 +99,12 @@ export default function File() {
             </div>
           </div>
         </label>
+        <button
+          onClick={handleUploadButtonClick}
+          className="w-full bg-blue-500 text-white  rounded-2xl py-2 "
+        >
+          Upload{" "}
+        </button>
       </div>
     </div>
   );
