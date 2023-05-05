@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useAddress,
   useContract,
   useMetamask,
   useContractWrite,
   useContractRead,
-} from '@thirdweb-dev/react';
+} from "@thirdweb-dev/react";
 
 export default function Rightbar() {
+
+  const address = useAddress();
   const { contract } = useContract(
     "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
   );
-  const { mutateAsync: addPatient } = useContractWrite(contract, 'addPatient');
+  const { mutateAsync: addPatient } = useContractWrite(contract, "addPatient");
   const { data, error } = useContractRead(contract, "getPatientInfo", [
-    useAddress(),
+    address,
   ]);
 
+  console.log(data)
+
   const [formData, setFormData] = useState({
-    height: '',
-    weight: '',
-    blood_group: '',
-    age: '',
-    gender: '',
+    height: "",
+    weight: "",
+    blood_group: "",
+    age: "",
+    gender: "",
   });
 
   const handleInputChange = (event) => {
@@ -31,20 +35,24 @@ export default function Rightbar() {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await addPatient([
+  const addPatientHandler = async () => {
+  console.log(formData)
+  try {
+    const result = await addPatient({
+      args: [
+        address,
         formData.height,
         formData.weight,
         formData.blood_group,
         formData.age,
         formData.gender,
-      ]);
-    } catch (error) {
-      console.error("Failed to add patient: ", error);
-    }
-  };
+      ],
+    });
+
+  } catch (error) {
+    console.error("Failed to add patient: ", error);
+  }
+};
 
   const connect = useMetamask();
 
@@ -56,7 +64,7 @@ export default function Rightbar() {
     <div className="flex flex-col items-left py-6 px-7 mr-4 w-full justify-start">
       <h2 className="font-body text-lg font-semibold">Enter your Details</h2>
 
-      <form onSubmit={handleSubmit} className="w-full flex justify-center flex-col gap-3 items-start ">
+      <div className="w-full flex justify-center flex-col gap-3 items-start ">
         <div className="flex gap-1 w-full mt-5 flex-col">
           <p className="font-body text-sm font-medium px-2"> Blood Group</p>
           <input
@@ -102,21 +110,20 @@ export default function Rightbar() {
           <input
             className="w-full px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
             type="text"
-            name="height"
+            name="weight"
             value={formData.weight}
             onChange={handleInputChange}
-/>
+          />
         </div>
         <div className="flex gap-1 w-full flex-col mt-3">
           <button
-            type="submit"
+            onClick={addPatientHandler}
             className="w-full bg-blue-400 text-white  rounded-2xl py-2 "
           >
             Update
           </button>
         </div>
-                  </form>
-
+      </div>
     </div>
   );
 }
