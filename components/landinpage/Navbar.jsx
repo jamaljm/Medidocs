@@ -13,7 +13,7 @@ export default function Navbar() {
           <Link href = "/dashboard">Dashboard</Link>
           <p>Doctor</p>
         </div>
-        <button className="btn bg-[#161618] text-white border-solid hover:bg-[#7270dd] hover:text-white capitalize rounded-full">
+        <button className="btn bg-[#161618] py-2 px-3 text-white border border-white hover:bg-[#7270dd] hover:text-white capitalize rounded-full">
           Get Started
         </button>
       </div>

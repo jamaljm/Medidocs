@@ -21,7 +21,7 @@ export default function Hero() {
             </p>
             <ConnectWallet />
           </div>
-          <img src="/assets/hero.pn" alt="" />
+          <img src="" alt="" />
         </div>
       </div>
     </div>
