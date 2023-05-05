@@ -1,76 +1,126 @@
 import React, { useCallback, useState } from "react";
 import Qr from '../qrcode/Qr'
 import { useStorageUpload } from "@thirdweb-dev/react";
-import { create } from 'web3.storage';
+import { Web3Storage } from "web3.storage";
+import { saveAs } from "file-saver";
+import Link from "next/link";
+import Image from "../dashboard/Image";
+import {
+  useAddress,
+  useContract,
+  useMetamask,
+  useContractWrite,
+  useContractRead,
+} from "@thirdweb-dev/react";
+
+const apiToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDZDQTI3YmI5NkFlMzNlODJjQTZEMWIzMTgwMjcxNTBmMmEwODA0OTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODMyNjY4NjIyODYsIm5hbWUiOiJqYW1hbCJ9.TTK1HcObAQ7tEVxnzeuF5ryfIeS253dRBXvc8iRuV_Y";
+
+const client = new Web3Storage({ token: apiToken });
 
 
 
 export default function File() {
 
   const [send, setSend] = useState(false);
-  
-  const { mutateAsync: upload } = useStorageUpload();
-  
-
-  
-  const [file, setFile] = useState(null);
-  const [cid, setCid] = useState(null);
-
-  const handleFileInputChange = (event) => {
-    setFile(event.target.files[0]);
+  const [show, setShow] = useState(false);
+  const [name,setName] = useState("")
+  const [patientaddress, setPatientaddress] = useState("");
+  const address = useAddress();
+  const { contract } = useContract(
+    "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
+  );
+  const { mutateAsync: addPatientDocument } = useContractWrite(
+    contract,
+    "addPatientDocument"
+  );
+  const handlePatientAddressChange = (event) => {
+    setPatientaddress(event.target.value);
   };
+  const handlePatientNameChange = (event) => {
+    setName(event.target.value);
+  };
+  
+   const [file, setFile] = useState("");
+   const handleUpload = async () => {
+     console.log(document.getElementById("input").files[0]);
+     var fileInput = document.getElementById("input");
 
-  const handleUploadButtonClick = async () => {
-    if (!file) {
-      alert('Please select a file to upload.');
-      return;
-    }
+     const rootCid = await client.put(fileInput.files, {
+       name: "record",
+       maxRetries: 3,
+     });
 
-    const formData = new FormData();
-    formData.append('file', file);
+     console.log(rootCid);
 
-    const client = create(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDZDQTI3YmI5NkFlMzNlODJjQTZEMWIzMTgwMjcxNTBmMmEwODA0OTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODMyNjY4NjIyODYsIm5hbWUiOiJqYW1hbCJ9.TTK1HcObAQ7tEVxnzeuF5ryfIeS253dRBXvc8iRuV_Y"
-    );
+     const res = await client.get(rootCid);
+     const files = await res.files();
+     console.log(files);
+     const url = URL.createObjectURL(files[0]);
+     console.log(url);
+     setFile(url);
+     localStorage.setItem("file", url);
 
+
+     
     try {
-      const cid = await client.put(formData);
-      setCid(cid);
+      const result = await addPatientDocument({
+        args: [patientaddress,name, file],
+      });
     } catch (error) {
-      console.error(error);
+      console.error("Failed to add patient: ", error);
     }
-  };
   
+   };
   const handleClick = () => {
     setSend(!send);
   
   };
 
+
+
   return (
     <div className="flex justify-start flex-col w-full gap-4 items-center mt-12">
       <div className="gap-2 flex flex-col justify-start item-center">
         <h1 className="font-body font-bold text-3xl">
-          Upload your medical record
+          Upload patient medical record
         </h1>
         <p className="item-center content-center flex justify-center">
           Securely store your medical records on the blockchain
         </p>
       </div>
-      <Qrcode />
-      <div className="flex gap-1 w-1/2 flex-col mt-3">
-        <button
-          className="w-full bg-blue-500 text-white  rounded-2xl py-2 "
-        >
-          Share to a doctor
-        </button>
+      <h2 className="font-body text-lg font-semibold">Enter patient address</h2>
+      <div
+        className="flex justify-center items-center gap-1 w-full mt-2
+       flex-col"
+      >
+        <input
+          className="w-1/2 border px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
+          type="text"
+          name="weight"
+          placeholder="address"
+          onChange={handlePatientAddressChange}
+        />
+      </div>{" "}
+      <div
+        className="flex justify-center items-center gap-1 w-full mt-2
+       flex-col"
+      >
+        <input
+          className="w-1/2 border px-4 py-[5px] rounded-xl focus:border-blue-300 focus:border-2"
+          type="text"
+          name="weight"
+          placeholder="record name"
+          onChange={handlePatientNameChange}
+        />
       </div>
-
       <div className="w-2/3 mt-8">
         <label className="cursor-pointer">
           <input
             className="text-sm cursor-pointer w-36 hidden"
             type="file"
-            onChange={handleFileInputChange}
+            id="input"
+            name="file"
             multiple
           />{" "}
           <div className="file_upload p-5 flex border-4 justify-between items-center w-full border-dotted border-gray-300 rounded-lg">
@@ -92,6 +142,7 @@ export default function File() {
               </svg>{" "}
               <div className=" text-indigo-500">Select or drop files here</div>
             </div>
+
             <div className="input_field justify-end items-end flex flex-row mr-2 text-center">
               <div className="text bg-indigo-600 text-white border font-body border-gray-300 rounded-2xl font-semibold cursor-pointer p-1 px-4  hover:bg-indigo-500">
                 Select
@@ -100,8 +151,8 @@ export default function File() {
           </div>
         </label>
         <button
-          onClick={handleUploadButtonClick}
-          className="w-full bg-blue-500 text-white  rounded-2xl py-2 "
+          onClick={handleUpload}
+          className="w-full mt-4 bg-blue-500 text-white  rounded-2xl py-2 "
         >
           Upload{" "}
         </button>

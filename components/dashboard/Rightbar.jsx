@@ -11,7 +11,7 @@ export default function Rightbar() {
 
   const address = useAddress();
   const { contract } = useContract(
-    "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82"
+    "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
   );
   const { mutateAsync: addPatient } = useContractWrite(contract, "addPatient");
   const { data, error } = useContractRead(contract, "getPatientInfo", [
