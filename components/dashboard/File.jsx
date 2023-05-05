@@ -85,7 +85,7 @@ export default function File() {
         </button>
         </div>
            <div>
-           <QRCodeScanner onScan={handleScan}/>
+          
            <p>Scanned text: {scannedText}</p>
             </div> 
       {/* <div className="w-2/3 mt-8">

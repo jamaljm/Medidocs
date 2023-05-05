@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { BrowserQRCodeReader } from '@zxing/library';
 
 function QRCodeScanner({ onScan }) {
   const videoRef = useRef(null);
