@@ -7,6 +7,7 @@ import {
   useContractRead,
 } from "@thirdweb-dev/react";
 
+
 export default function Rightbar() {
 
   const address = useAddress();
