@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import File from "./File";
 import Rightbar from "./Rightbar";
+import QRCodeScanner from "./QrScanner";
 
 export default function Dashboard() {
   return (
@@ -26,6 +27,8 @@ export default function Dashboard() {
           <Rightbar />
         </div>
       </div>
+
+      <QRCodeScanner />
     </div>
   );
 }

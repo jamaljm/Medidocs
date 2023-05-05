@@ -1,5 +1,7 @@
 import { ConnectWallet } from '@thirdweb-dev/react';
 import React from 'react'
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Sidebar() {
   return (
@@ -9,6 +11,7 @@ export default function Sidebar() {
           <img src="/assets/logofull.png" className="h-14" />
         </div>
         <div className="mt-7">
+        <Link href="/dashboard">
           <button
             type="button"
             class="text-gray-900 w-full gap-2 bg-blue-100 justify-start hover:bg-blue-100  focus:ring-gray-100 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-start  mr-2 mb-2"
@@ -18,16 +21,19 @@ export default function Sidebar() {
               Home
             </p>
           </button>
+          </Link>
 
+          <Link href="/precaution">
           <button
             type="button"
             class="text-gray-100 w-full  gap-2 hover:bg-blue-100 hover:text-gray-900 focus:ring-gray-100 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center  mr-2 mb-2"
           >
-            <img src="https://img.icons8.com/fluency-systems-regular/24/2B92FF/home.png" />
+            <img src="https://img.icons8.com/?size=512&id=JOKQVP0Iztdu&format=png" class="w-5 h-5"/>
             <p className="flex justify-center items-center content-center mt-1">
-              Home
+            Precautions
             </p>
           </button>
+          </Link>
 
           <button
             type="button"
