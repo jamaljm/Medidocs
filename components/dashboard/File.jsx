@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import Qr from '../qrcode/Qr'
+import QRCodeScanner from "./QrScanner";
+
+const QRCodeScanner = dynamic(() => import('../components/QRCodeScanner'), { ssr: false });
 
 export default function File() {
     const [send, setSend] = useState(false);
+    const [scannedText, setScannedText] = useState('');
+
+    const handleScan = (text) => {
+      setScannedText(text);
+    };
+  
     
   const handleClick = () => {
     setSend(!send);
@@ -75,8 +84,11 @@ export default function File() {
         >
           Share to a doctor
         </button>
-      </div>
-
+        </div>
+           <div>
+           <QRCodeScanner onScan={handleScan}/>
+           <p>Scanned text: {scannedText}</p>
+            </div> 
       {/* <div className="w-2/3 mt-8">
         <label className="cursor-pointer">
           <input
