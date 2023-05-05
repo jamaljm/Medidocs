@@ -68,10 +68,22 @@ This project was created for Amritha BlockCamp 2023 by Team 520 .
    <img src="https://i.imgur.com/BtCTgHM.png" alt="Screenshot" width="full">
    <br>
       <br>
-  <img src="https://i.imgur.com/8XevQVH.png"width="full">
+  <img src="https://i.imgur.com/D778AS5.png"width="full">
+  <br>
+      <br>
+        <br>
+  <img src="https://i.imgur.com/Qivs92O.png"width="full">
   <br>
       <br>
   <img src="https://i.imgur.com/gUcwv3h.png" alt="Scrnshot" width="full">
+  <br>
+   <br>
+      <br>
+  <img src="https://i.imgur.com/fgSHsnQ.jpg" alt="Scrnshot" width="full">
+  <br>
+   <br>
+      <br>
+  <img src="https://i.imgur.com/yZRzKvY.jpg" alt="Scrnshot" width="full">
   <br>
    
 
