@@ -1,10 +1,12 @@
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import "../styles/globals.css";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "ethereum";
+const activeChain = ChainId.Localhost;
+
+console.log("hi,",activeChain)
 
 function MyApp({ Component, pageProps }) {
   return (
