@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { ConnectWallet } from '@thirdweb-dev/react';
 
 export default function Hero() {
   return (
@@ -9,7 +8,7 @@ export default function Hero() {
         <Navbar />
         <div className="bg-[#161618] flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
           <div className="flex flex-col gap-5 lg:gap-10">
-            <p className="text-white text-2xl py-28 sm:text-4xl md:text-5xl lg:text-6xl font-bold">
+            <p className="text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
             THE FUTURE OF
             <br className="lg:flex hidden" />  HEALTHCARE IS HERE!
               {/* <br className="lg:flex hidden" /> consectetur adipisicin */}
@@ -19,9 +18,10 @@ export default function Hero() {
               <br className="lg:flex hidden" />
               - revolutionizing healthcare, one patient at a time.
             </p>
-            <ConnectWallet />
+            
           </div>
-          <img src="" alt="" />
+         
+          <img src="/assets/hero-img.png" alt=""  className='w-1/2 '/>
         </div>
       </div>
     </div>
