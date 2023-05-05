@@ -5,7 +5,7 @@ import Rightbar from "./Rightbar";
 
 export default function Dashboard() {
   return (
-    <div className="bg-[#141618] flex min-h-screen w-full">
+    <div className="bg-[#05213d] flex min-h-screen w-full">
       <div
         className="flex w-full bg-[#141618] sm:w-64 m-0 p-0"
         style={{ flex: 0.6 }}
