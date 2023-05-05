@@ -14,7 +14,7 @@ export default function File() {
     questions: '',
   });
 
-  const [response, setResponse] = useState("null");
+  const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
   
@@ -26,17 +26,18 @@ export default function File() {
   const generatePrecautions = () => {
     const precautions = `I am a 23 year old male with a weight of 76 and height 175cm.I am going to a  ${formValues.checkupPurpose}.I have the followong symptoms: ${formValues.symptoms}. I take these medications: ${formValues.previousMedications}. What are some things I should know and do before going. Would also like to know : ${formValues.questions}`;
 
-    fetch('https://example.com/api', {
+    fetch('http://127.0.0.1:8000/chat/chatgpt/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(precautions)})
+      body: JSON.stringify({"input_text": precautions})})
       .then(response => response.json())
       .then(data => setResponse(data))
       .catch(error => setError(error));
       setShow(false);
-    console.log(response); // output the precautions string to the console
+    console.log(response,"hisl");
+    console.log(error) // output the precautions string to the console
  
   };
 
@@ -145,9 +146,9 @@ if (show) {
           Personalized health recommendations before your checkup
         </p>
       </div>
-      <div className="  flex flex-col w-1/2 px-4 py-3 h-full border-2 rounded-2xl mt-0 bg-slate-50 justify-between gap-3">
-        <h1 className="item-center font-semibold content-center flex justify-center font-sans text-xl mx-3 mt-10">
-          {response}
+      <div className="  flex flex-col w-2/3 indent-5 text-justify px-4 py-3 h-full border-2 rounded-2xl mt-0 bg-slate-50 justify-between gap-3">
+        <h1 className="item-center fnt-semibold content-center flex justify-center font-sans text-xl mx-3 mt-10">
+          {response?.response}
         
         
               </h1>

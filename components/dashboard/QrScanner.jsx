@@ -1,10 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
-import jsQR from 'jsqr';
+import { useRef } from 'react';
 
-function QRCodeScanner() {
-  const videoRef = useRef();
-  const canvasRef = useRef();
-  const [qrCode, setQrCode] = useState('');
+function QRCodeScanner({ onScan }) {
 
   // useEffect(() => {
   //   const video = videoRef.current;
@@ -45,9 +41,7 @@ function QRCodeScanner() {
 
   return (
     <div>
-      <video ref={videoRef} style={{ display: 'none' }} />
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <p>{qrCode}</p>
+      <video  style={{ width: '100%' }} autoPlay muted onLoadedMetadata />
     </div>
   );
 }
