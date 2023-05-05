@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Qr from '../qrcode/Qr'
 import QRCodeScanner from "./QrScanner";
 
-const QRCodeScanner = dynamic(() => import('../components/QRCodeScanner'), { ssr: false });
 
 export default function File() {
     const [send, setSend] = useState(false);
