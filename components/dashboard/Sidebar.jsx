@@ -1,7 +1,7 @@
 import { ConnectWallet } from '@thirdweb-dev/react';
 import React from 'react'
-import Image from 'next/image';
 import Link from 'next/link';
+
 
 export default function Sidebar() {
   return (
@@ -11,6 +11,7 @@ export default function Sidebar() {
           <img src="/assets/logofull.png" className="h-14" />
         </div>
         <div className="mt-7">
+
         <Link href="/dashboard">
           <button
             type="button"
@@ -34,36 +35,19 @@ export default function Sidebar() {
             </p>
           </button>
           </Link>
-
-          <button
+          <Link href="/profile">          <button
             type="button"
             class="text-gray-100 w-full  gap-2  hover:bg-blue-100 hover:text-gray-900 focus:ring-gray-100 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center  mr-2 mb-2"
           >
-            <img src="https://img.icons8.com/fluency-systems-regular/24/2B92FF/home.png" />
+            <img src="https://img.icons8.com/ios/24/2B92FF/user-male-circle--v1.png" alt="" />
             <p className="flex justify-center items-center content-center mt-1">
-              Home
+              Profile
             </p>
           </button>
+          </Link>
 
-          <button
-            type="button"
-            class="text-gray-100 w-full  gap-2  hover:bg-blue-100 hover:text-gray-900 focus:ring-gray-100 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center  mr-2 mb-2"
-          >
-            <img src="https://img.icons8.com/fluency-systems-regular/24/2B92FF/home.png" />
-            <p className="flex justify-center items-center content-center mt-1">
-              Home
-            </p>
-          </button>
-
-          <button
-            type="button"
-            class="text-gray-100 w-full  gap-2  hover:bg-blue-100 hover:text-gray-900 focus:ring-gray-100 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center  mr-2 mb-2"
-          >
-            <img src="https://img.icons8.com/fluency-systems-regular/24/2B92FF/home.png" />
-            <p className="flex justify-center items-center content-center mt-1">
-              Home
-            </p>
-          </button>
+      
+         
         </div>
       </div>
 
