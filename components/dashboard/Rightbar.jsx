@@ -11,7 +11,7 @@ export default function Rightbar() {
 
   const address = useAddress();
   const { contract } = useContract(
-    "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
+    "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f"
   );
   const { mutateAsync: addPatient } = useContractWrite(contract, "addPatient");
   const { data, error } = useContractRead(contract, "getPatientInfo", [
@@ -72,6 +72,7 @@ export default function Rightbar() {
             name="blood_group"
             value={formData.blood_group}
             onChange={handleInputChange}
+            
           />
         </div>
         <div className="flex gap-1 w-full  flex-col">

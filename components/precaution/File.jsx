@@ -33,7 +33,7 @@ export default function File() {
       },
       body: JSON.stringify({"input_text": precautions})})
       .then(response => response.json())
-      .then(data => setResponse(data))
+      .then(data => setResponse(data?.response))
       .catch(error => setError(error));
       setShow(false);
     console.log(response,"hisl");
@@ -44,6 +44,14 @@ export default function File() {
 
     
 
+const paragraphs = response?.split("\n").map((response , index) => (
+  <p
+    className="item-center content-center flex justify-center font-sans text-lg mx-3 mt-10"
+    key={index}
+  >
+    {response}
+  </p>
+));
 
 
 if (show) {
@@ -135,26 +143,24 @@ if (show) {
   );
 }
   else {
-  return(
+  return (
     <>
-     <div className="flex justify-start flex-col w-full gap-4 items-center mt-6">
-      <div className="gap-1 flex flex-col justify-start item-center">
-        <h1 className="font-body font-bold text-2xl">
-          Generate Precautions Before Checkup
-        </h1>
-        <p className="item-center content-center flex justify-center">
-          Personalized health recommendations before your checkup
-        </p>
+      <div className="flex justify-start flex-col w-full gap-4 items-center mt-6">
+        <div className="gap-1 flex flex-col justify-start item-center">
+          <h1 className="font-body font-bold text-2xl">
+            Generate Precautions Before Checkup
+          </h1>
+          <p className="item-center content-center flex justify-center">
+            Personalized health recommendations before your checkup
+          </p>
+        </div>
+        <div className="  flex flex-col w-2/3 indent-5 text-justify px-4 py-3 h-full border-2 rounded-2xl mt-0 bg-slate-50 justify-between gap-3">
+          <h1 className="item-center content-center flex justify-center font-sans text-lg mx-3 mt-10">
+            {response}
+          </h1>
+        </div>
       </div>
-      <div className="  flex flex-col w-2/3 indent-5 text-justify px-4 py-3 h-full border-2 rounded-2xl mt-0 bg-slate-50 justify-between gap-3">
-        <h1 className="item-center fnt-semibold content-center flex justify-center font-sans text-xl mx-3 mt-10">
-          {response?.response}
-        
-        
-              </h1>
-      </div>
-    </div>
     </>
-  )
+  );
 }
 }

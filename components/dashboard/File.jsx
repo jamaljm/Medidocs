@@ -19,7 +19,7 @@ export default function File() {
   
      const address = useAddress();
      const { contract } = useContract(
-       "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
+       "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f"
      );
      const { mutateAsync: addPatient } = useContractWrite(
        contract,
@@ -36,64 +36,45 @@ export default function File() {
 
   return (
     <div className="flex justify-start flex-col w-full gap-4 items-center mt-12">
-      <div className="gap-2 flex flex-col justify-start item-center">
+      <div className="gap-2 mb-5 flex flex-col justify-start item-center">
         <h1 className="font-body font-bold text-3xl">
           Upload your medical record
         </h1>
         <p className="item-center content-center flex justify-center">
           Securely store your medical records on the blockchain
         </p>
-          </div>
-          {!send ? (
-      <><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl mt-5 bg-slate-50 justify-between gap-5">
-                  <div className=" flex items-center gap-2 ">
-                      <img
-                          className="w-10"
-                          src="https://img.icons8.com/cute-clipart/64/null/file.png" />
-                      <h2 className="font-body font-semibold">MRI scan</h2>
-                  </div>
-                  <div className="flex items-center justify-center ">
-                      <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-                          View Doc
-                      </button>
-                  </div>
-              </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-                      <div className=" flex items-center gap-2 ">
-                          <img
-                              className="w-10"
-                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
-                          <h2 className="font-body font-semibold">MRI scan</h2>
-                      </div>
-                      <div className="flex items-center justify-center ">
-                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-                              View Doc
-                          </button>
-                      </div>
-                  </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-                      <div className=" flex items-center gap-2 ">
-                          <img
-                              className="w-10"
-                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
-                          <h2 className="font-body font-semibold">MRI scan</h2>
-                      </div>
-                      <div className="flex items-center justify-center ">
-                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-                              View Doc
-                          </button>
-                      </div>
-                  </div><div className="flex w-1/2 px-4 py-3 border-2 rounded-2xl bg-slate-50 justify-between gap-5">
-                      <div className=" flex items-center gap-2 ">
-                          <img
-                              className="w-10"
-                              src="https://img.icons8.com/cute-clipart/64/null/file.png" />
-                          <h2 className="font-body font-semibold">MRI scan</h2>
-                      </div>
-                      <div className="flex items-center justify-center ">
-                          <button className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs">
-                              View Doc
-                          </button>
-                      </div>
-                  </div></>) : (<Qrcode />)}
+      </div>
+      {!send ? (
+        <>
+         
+          {data?.map((doc, index) => (
+            <div
+              className="flex w-1/2 px-4 py-3 border-2 rounded-2xl mt-0 bg-slate-50 justify-between gap-5"
+              key={index}
+            >
+              <div className=" flex items-center gap-2 ">
+                <img
+                  className="w-10"
+                  src="https://img.icons8.com/cute-clipart/64/null/file.png"
+                />
+                <h2 className="font-body font-semibold">{doc.name}</h2>
+              </div>
+              <div className="flex items-center justify-center ">
+                <a
+                  href={doc.document}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-white font-semibold items-center bg-blue-400 rounded-3xl text-xs"
+                >
+                  View Doc
+                </a>
+              </div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <Qrcode />
+      )}
       <div className="flex gap-1 w-1/2 flex-col mt-3">
         <button
           onClick={handleClick}
@@ -101,10 +82,8 @@ export default function File() {
         >
           Share to a doctor
         </button>
-        </div>
-           <div>
-          
-            </div> 
+      </div>
+      <div></div>
       {/* <div className="w-2/3 mt-8">
         <label className="cursor-pointer">
           <input
@@ -147,10 +126,12 @@ export default function File() {
 
 
 function Qrcode() {
+       const address = useAddress();
+
     return (
         <div className="flex flex-col py-4 w-1/2  justify-center mt-7 bg-slate-200 rounded-2xl border-2 items-center">
             <h2 className="font-bold ">Scan the qr code</h2>
-            <Qr obj="fgfdgdgdfgdf" style="h-44 w-44 m-5 bg-white p-3 rounded-3xl"/>
+            <Qr obj={address} style="h-44 w-44 m-5 bg-white p-3 rounded-3xl"/>
             </div>
         )
 }

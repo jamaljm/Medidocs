@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import Qr from '../qrcode/Qr'
+import Qr from "../qrcode/Qr";
 import { useStorageUpload } from "@thirdweb-dev/react";
 import { Web3Storage } from "web3.storage";
 import { saveAs } from "file-saver";
@@ -18,66 +18,71 @@ const apiToken =
 
 const client = new Web3Storage({ token: apiToken });
 
-
-
 export default function File() {
-
   const [send, setSend] = useState(false);
   const [show, setShow] = useState(false);
-  const [name,setName] = useState("")
+  const [name, setName] = useState("");
   const [patientaddress, setPatientaddress] = useState("");
   const address = useAddress();
+  console.log(address);
   const { contract } = useContract(
-    "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c"
+    "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f"
   );
   const { mutateAsync: addPatientDocument } = useContractWrite(
     contract,
     "addPatientDocument"
   );
+    
   const handlePatientAddressChange = (event) => {
     setPatientaddress(event.target.value);
   };
   const handlePatientNameChange = (event) => {
     setName(event.target.value);
   };
-  
-   const [file, setFile] = useState("");
-   const handleUpload = async () => {
-     console.log(document.getElementById("input").files[0]);
-     var fileInput = document.getElementById("input");
 
-     const rootCid = await client.put(fileInput.files, {
-       name: "record",
-       maxRetries: 3,
-     });
+  const [file, setFile] = useState("");
+  const handleUpload = async () => {
+    console.log(document.getElementById("input").files[0]);
+    var fileInput = document.getElementById("input");
 
-     console.log(rootCid);
+    const rootCid = await client.put(fileInput.files, {
+      name: "record",
+      maxRetries: 3,
+    });
 
-     const res = await client.get(rootCid);
-     const files = await res.files();
-     console.log(files);
-     const url = URL.createObjectURL(files[0]);
-     console.log(url);
-     setFile(url);
-     localStorage.setItem("file", url);
+    console.log(rootCid);
 
+    const res = await client.get(rootCid);
+    const files = await res.files();
+    console.log(files);
+    const url = URL.createObjectURL(files[0]);
+    console.log(url);
+    setFile(url);
+    localStorage.setItem("file", url);
 
-     
+    console.log(patientaddress, name, file);
+
     try {
       const result = await addPatientDocument({
-        args: [patientaddress,name, file],
+        args: [patientaddress, name, file],
       });
     } catch (error) {
       console.error("Failed to add patient: ", error);
     }
-  
-   };
+  };
   const handleClick = () => {
     setSend(!send);
-  
   };
 
-
+  const addPatientHandler = async () => {
+    try {
+      const result = await addPatientDocument({
+        args: [patientaddress, name, file],
+      });
+    } catch (error) {
+      console.error("Failed to add patient: ", error);
+    }
+  };
 
   return (
     <div className="flex justify-start flex-col w-full gap-4 items-center mt-12">
@@ -156,18 +161,23 @@ export default function File() {
         >
           Upload{" "}
         </button>
+
+        <button
+          onClick={handleUpload}
+          className="w-full mt-4 bg-blue-500 text-white  rounded-2xl py-2 "
+        >
+          Save
+        </button>
       </div>
     </div>
   );
 }
 
-
 function Qrcode() {
-    return (
-        <div className="flex flex-col py-4 w-1/2  justify-center mt-5 bg-slate-200 rounded-2xl border-2 items-center">
-            <h2 className="font-bold ">Scan the qr code</h2>
-            <Qr obj="fgfdgdgdfgdf" style="h-44 w-44 m-5 bg-white p-3 rounded-3xl"/>
-            </div>
-        )
+  return (
+    <div className="flex flex-col py-4 w-1/2  justify-center mt-5 bg-slate-200 rounded-2xl border-2 items-center">
+      <h2 className="font-bold ">Scan the qr code</h2>
+      <Qr obj="fgfdgdgdfgdf" style="h-44 w-44 m-5 bg-white p-3 rounded-3xl" />
+    </div>
+  );
 }
-

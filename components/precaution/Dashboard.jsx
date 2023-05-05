@@ -23,7 +23,7 @@ export default function Dashboard() {
           className="flex w-full rounded-r-3xl bg-slate-200 sm:w-64 m-0 p-0"
           style={{ flex: 1.2 }}
         >
-          {/* <Rightbar /> */}
+          <Rightbar />
         </div>
       </div>
     </div>
